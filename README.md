@@ -10,7 +10,7 @@ NOTE: This can only be run on Windows based machines. If you are looking for sim
 However, in terms of robustness for automation, this is much more reliable than Sikulix.
 
 # Setup or Installation
-1) Download the latest executable from the bin folder
+1) Download the latest executable from the [bin](https://github.com/ibaralf/automated_file_uploader/tree/master/bin) folder
 2) Verify you can execute the .exe file (you should see something like)
   ```
    ps> AutomatedFileUploader.exe -h
