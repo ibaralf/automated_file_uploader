@@ -1,5 +1,11 @@
-#include <Logger.au3>
+;#include <Logger.au3>
 ; Windows explorer Uploader
+; TODO: Some rechecking might be overkill, modify as this
+;       becomes more robust.
+; NOTES:
+; - Giving control focus then clicking seems to ensure control is truly active
+;   ControlFocus
+;   ControlClick
 
 Func _getWindowHandle($winTag, $activateWindow)
    $winHandle = ""
@@ -56,44 +62,73 @@ Func _checkControlExist($winTag, $ctrlTag)
    Return $ctrlFound
 EndFunc
 
+; Specific method to set the directory path via the files ControlClick. This avoid
+; having to right click, delete, then set path.
+; However, several other ways to accomplish this.
 Func _sendVerifyDirectory($hWin, $filesCtrl, $dirCtrl, $dirPath)
    $nretry = 0
    $textVerified = False
    While $textVerified <> True and $nretry < 2
+	  ControlFocus ($hWin, "", $filesCtrl)
+	  ControlClick ($hWin, "", $filesCtrl)
 	  ControlSetText($hWin, "", $filesCtrl, "")
 	  $nretry = $nretry + 1
-	  ControlSend($hWin, "", $filesCtrl, $dirPath)
-	  Sleep(500)
-	  ControlSend($hWin, "", $filesCtrl, "{ENTER}")
+	  ControlSend($hWin, "", $filesCtrl, $dirPath, "{ENTER}")
 	  Sleep(300)
+	  ControlSend($hWin, "", $filesCtrl, "{ENTER}")
+	  Sleep(800)
 	  $readPath = ControlGetText($hWin, "", $dirCtrl)
 	  If StringInStr($readPath, $dirPath) <> 0 Then
 		 _logger("INFO", "Setting directory path verified - " & $readPath)
 		 $textVerified = True
 	  Else
-		 _logger("INFO", "Sent path not same - " & $readPath)
+		 _logger("INFO", "Sent path not same - " & $dirPath & "::" & $readPath)
 		 Sleep(2000)
 	  EndIf
    WEnd
    Return $textVerified
 EndFunc
 
-Func _sendTextToControl($winTag, $filesCtrl, $textToSend, $dirCtrl)
-   $winHandle = _getWindowHandle($winTag, True)
-   If IsHWnd($winHandle) = 0 Then
-	  _logger("ERROR", "_sendTextToControl needs a valid WindowHandler")
-	  Return False
-   EndIf
-   if _checkControlExist($winHandle, $ctrlTag) Then
-	  ControlFocus ($winHandle, "", $ctrlTag )
-	  ControlClick($winHandle, "", $ctrlTag)
-	  Sleep(100)
-	  _sendVerifyDirectory($winHandle, $filesCtrl,
-   Else
-	  _logger("ERROR", "Control not found - " &$ctrlTag)
-   EndIf
+; TODO: refactor to combine with _sendVerifyDirectoy
+Func _setControlText($hWin, $ctrlTag, $setText)
+   $nretry = 0
+   $textVerified = False
+   While $textVerified <> True and $nretry < 2
+	  ControlSetText($hWin, "", $ctrlTag, "")
+	  Sleep(1000)
+	  ControlSend($hWin, "", $ctrlTag, $setText)
+	  Sleep(300)
+	  $readText = ControlGetText($hWin, "", $ctrlTag)
+	  If $readText = $setText Then
+		 _logger("INFO", "Send control text verified - " & $readText)
+		 $textVerified = True
+	  Else
+		 _logger("INFO", "Sent text not same - " & $readText)
+		 Sleep(2000)
+	  EndIf
+   WEnd
 EndFunc
 
+Func _sendTextToControl($hWin, $filesCtrl, $textToSend)
+   $isSuccess = False
+   ;$winHandle = _getWindowHandle($winTag, True)
+   ;If IsHWnd($winHandle) = 0 Then
+	;  _logger("ERROR", "_sendTextToControl needs a valid WindowHandler")
+	;  Return False
+   ;EndIf
+   if _checkControlExist($hWin, $filesCtrl) Then
+	  ; Overkill? might be
+	  ControlFocus ($hWin, "", $filesCtrl )
+	  ControlClick($hWin, "", $filesCtrl)
+	  Sleep(100)
+	  $isSuccess = _setControlText($hWin, $filesCtrl, $textToSend)
+   Else
+	  _logger("ERROR", "Control not found - " &$filesCtrl)
+   EndIf
+   Return $isSuccess
+EndFunc
+
+; NOT USED
 Func _navigateToDirectory($winTag, $fileCtrlTag, $directoryStr, $dirCtrlTag)
    $winHandle = _getWindowHandle($winTag, True)
    If IsHWnd($winHandle) = 0 Then
@@ -103,10 +138,12 @@ Func _navigateToDirectory($winTag, $fileCtrlTag, $directoryStr, $dirCtrlTag)
 
 EndFunc
 
-Global $winId = "[Class:#32770]"
-Global $filesId = "[CLASS:Edit; INSTANCE:1]"
-Global $dirId = "[CLASS:ToolbarWindow32; INSTANCE:3]"
+; For testing
+;Global $winId = "[Class:#32770]"
+;Global $filesId = "[CLASS:Edit; INSTANCE:1]"
+;Global $dirId = "[CLASS:ToolbarWindow32; INSTANCE:3]"
 ;_logger("INFO", "START")
 ;_sendTextToControl("[Class:#32770]", "[CLASS:Edit; INSTANCE:1]", "D:\Users\ibarra.alfonso\Documents")
 ;_sendTextToControl("[Class:#32770]", "[CLASS:ToolbarWindow32; INSTANCE:3]", "D:\Users\ibarra.alfonso\Documents")
-_sendVerifyDirectory($winId, $filesId, $dirId, "D:\Users\ibarra.alfonso\Documents\seed_files")
+;_sendVerifyDirectory($winId, $filesId, $dirId, "D:\Users\ibarra.alfonso\Documents\seed_files")
+
