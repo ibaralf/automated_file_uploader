@@ -15,7 +15,8 @@ However, in terms of robustness for automation, this is much more reliable than 
   ```
    ps> AutomatedFileUploader.exe -h
    
-   Windows Auto File UploaderParameters: (\*) required   
+   Windows Auto File Uploader
+   Parameters: (\*) required   
        -d, directory path of files (\*)  
        -f, list of files to upload, space separated (\*)  
        -h, show help
