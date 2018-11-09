@@ -25,7 +25,13 @@ However, in terms of robustness for automation, this is much more reliable than 
   ```
 3) Open a windows file explorer and execute the .exe file
 
-# How to use in your Ruby code:
+# How it Works
+1) From your application, open a file upload window (ex. your web based application having an upload link that you click)
+2) Browsers that allows file uploads usually opens the local file system GUI
+3) Execute AutomatedFileUploader.exe with the right parameters
+4) Files are then automatically uploaded
+
+# Using in Ruby code:
 If you are trying to automate file uploads for your web based application, and using something like RSpec and Capybara, you can automate file uploads by callng this as a System call.
 ```ruby
   automation_workingdir = File.dirname(__FILE__) + "/../loc_of_executable"
@@ -35,4 +41,12 @@ If you are trying to automate file uploads for your web based application, and u
     system(cmd_call)
   end
   ```
+
+# Using in Python code:
+Please add Here
+
+# NOTES:
+* You can add support or fixes by opening PRs
+* Support for other Windows version would be appreciated
+* Spaces in file names still not currently supported.
 
