@@ -12,7 +12,7 @@ However, in terms of robustness for automation, this is much more reliable than 
 # Setup or Installation
 1) Download the latest executable from the bin folder
 2) Verify you can execute the .exe file (you should see something like)
-  
+  ```
    ps> AutomatedFileUploader.exe -h
    
    Windows Auto File UploaderParameters: (\*) required   
@@ -21,8 +21,9 @@ However, in terms of robustness for automation, this is much more reliable than 
        -h, show help
    Ex:   
        ps>  AutoFileUploader.exe -d D:\Users\ibarraa\Documents -f fname1.txt fname2.txt
-  
-3) 
+  ```
+3) Open a windows file explorer and execute the .exe file
+
 # How to use in your Ruby code:
 If you are trying to automate file uploads for your web based application, and using something like RSpec and Capybara, you can automate file uploads by callng this as a System call.
 ```ruby
