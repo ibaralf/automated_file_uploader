@@ -55,4 +55,4 @@ Please add Here
 * Spaces in file names still not currently supported.
 
 # License
-This tool is available as open source under the terms of the MIT License. 
+This tool is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT). 
