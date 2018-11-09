@@ -41,7 +41,10 @@ If you are trying to automate file uploads for your web based application, and u
     system(cmd_call)
   end
   ```
-
+# Using in Java:
+```java
+   Runtime.getRuntime().exec("C:\\Users\\ibarraa\\AutomatedFileUploader.exe");
+```
 # Using in Python code:
 Please add Here
 
