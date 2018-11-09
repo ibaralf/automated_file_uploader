@@ -6,7 +6,8 @@ Developed using AutoIT. This can be used to detect an open windows file explorer
 * Fully tested only on Win10
 
 
-NOTE: This can only be run on Windows based machines. If you are looking for similar solutions for Mac or Linux, the closest solution I have come up with is using the Java based Sikulix tool. I am planning on writing an open sourced project on that if I have some time.
+NOTE: This can only be run on Windows based machines. If you are looking for similar solutions for Mac or Linux, the closest solution I have come up with is using the Java based [Sikulix tool](http://sikulix.com/). I am planning on writing an open sourced project on that if I have some time.
+
 However, in terms of robustness for automation, this is much more reliable than Sikulix.
 
 # Setup or Installation
