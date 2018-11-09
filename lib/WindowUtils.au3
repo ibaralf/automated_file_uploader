@@ -6,6 +6,7 @@
 ; - Giving control focus then clicking seems to ensure control is truly active
 ;   ControlFocus
 ;   ControlClick
+
 Func _getWindowHandle($winTag, $activateWindow)
    $winHandle = ""
    $nretry = 0
@@ -145,3 +146,4 @@ EndFunc
 ;_sendTextToControl("[Class:#32770]", "[CLASS:Edit; INSTANCE:1]", "D:\Users\ibarra.alfonso\Documents")
 ;_sendTextToControl("[Class:#32770]", "[CLASS:ToolbarWindow32; INSTANCE:3]", "D:\Users\ibarra.alfonso\Documents")
 ;_sendVerifyDirectory($winId, $filesId, $dirId, "D:\Users\ibarra.alfonso\Documents\seed_files")
+
