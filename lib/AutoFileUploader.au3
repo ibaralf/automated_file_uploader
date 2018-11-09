@@ -15,6 +15,8 @@
 Global $windowTag = "[Class:#32770]" ; Window class
 Global $directoryTag = "[CLASS:ToolbarWindow32; INSTANCE:3]" ; Directory  path control (top field)
 Global $filesTag = "[CLASS:Edit; INSTANCE:1]" ; Files control (near botton txt field)
+Global $openButtonTag = "[CLASS:Button; INSTANCE:1]"
+Global $cancelButtonTag = "[CLASS:Button; INSTANCE:2]"
 
 Func _runUploader()
    _initializeArguments()
@@ -36,6 +38,10 @@ Func _uploadFiles()
    _logger("INFO", "passed files: " & $files)
    _sendVerifyDirectory($hWin, $filesTag, $directoryTag, $directory)
    _sendTextToControl($hWin, $filesTag, $files)
+   _clickControl($hWin, $openButtonTag)
+   If _waitTillWindowClosed($hWin) <> True Then
+	  _clickControl($hWin, $openButtonTag)
+   EndIf
 EndFunc
 
 Func _addQuotes($spacedString)

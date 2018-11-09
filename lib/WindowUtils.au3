@@ -62,6 +62,35 @@ Func _checkControlExist($winTag, $ctrlTag)
    Return $ctrlFound
 EndFunc
 
+Func _clickControl($hWin, $btnCtrl)
+   If _checkControlExist($hWin, $btnCtrl) = True Then
+	  ControlClick ($hWin, "", $btnCtrl)
+   Else
+	  _logger("ERROR", "Cannot click control not found - " & $btnCtrl)
+   EndIf
+EndFunc
+
+; Wait max of 4 seconds till windows is closed
+Func _waitTillWindowClosed($hWin)
+   $winStillExist = True
+   $nwait = 0
+   While $winStillExist and $nwait < 5
+	  $nwait = $nwait + 1
+	  If WinExists($hWin) Then
+		 _logger("INFO", "Window still exist, waiting")
+		 Sleep(1000)
+	  Else
+		 $winStillExist = False
+	  EndIf
+   WEnd
+   If $winStillExist Then
+	  _logger("ERROR", "Window did not close")
+	  Return False
+   EndIf
+   _logger("INFO", "Window verified closed")
+   Return True
+EndFunc
+
 ; Specific method to set the directory path via the files ControlClick. This avoid
 ; having to right click, delete, then set path.
 ; However, several other ways to accomplish this.
@@ -116,7 +145,7 @@ Func _sendTextToControl($hWin, $filesCtrl, $textToSend)
 	;  _logger("ERROR", "_sendTextToControl needs a valid WindowHandler")
 	;  Return False
    ;EndIf
-   if _checkControlExist($hWin, $filesCtrl) Then
+   if _checkControlExist($hWin, $filesCtrl) = True Then
 	  ; Overkill? might be
 	  ControlFocus ($hWin, "", $filesCtrl )
 	  ControlClick($hWin, "", $filesCtrl)
