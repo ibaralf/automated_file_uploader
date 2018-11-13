@@ -11,20 +11,16 @@ NOTE: This can only be run on Windows based machines. If you are looking for sim
 However, in terms of robustness for automation, this is much more reliable than Sikulix.
 
 # Setup or Installation
-1) Download the latest executable from the [bin](https://github.com/ibaralf/automated_file_uploader/tree/master/bin) folder
-2) Verify you can execute the .exe file (you should see something like)
+Simply download the correct executable, either the 32 or 64 bit version.
+
+To test it manually:
+1) Download the latest executable from the [bin](https://github.com/ibaralf/automated_file_uploader/tree/master/bin) folder, there are two versions (32 and 64).
+2) Open your application upload windows file explorer
+3) Execute the .exe file
   ```
-   ps> AutomatedFileUploader.exe -h
-   
-   Windows Auto File Uploader
-   Parameters: (\*) required   
-       -d, directory path of files (\*)  
-       -f, list of files to upload, space separated (\*)  
-       -h, show help
-   Ex:   
-       ps>  AutoFileUploader.exe -d D:\Users\ibarraa\Documents -f fname1.txt fname2.txt
+   ps> AutomatedFileUploader32.exe -d D:\Users\ibarraa\Documents -f fname1.txt fname2.txt
   ```
-3) Open a windows file explorer and execute the .exe file
+4) Files passed by parameter (-f) located in the directory (-d) should be automatically uploaded.
 
 # How it Works
 1) From your application, open a file upload window (ex. your web based application having an upload link that you click)
