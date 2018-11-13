@@ -49,6 +49,10 @@ If you are trying to automate file uploads for your web based application, and u
 # Using in Python code:
 Please add Here
 
+# ISSUES
+* Output to console (commandline) does not show
+
+
 # NOTES:
 * You can add support or fixes by opening PRs
 * Support for other Windows version would be appreciated
