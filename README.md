@@ -54,8 +54,12 @@ If you are trying to automate file uploads for your web based application, and u
 # Using in Python code:
 Please add Here
 
-# ISSUES
-* Output to console (commandline) does not show
+# ISSUES and TODOs
+* Output to console (commandline) does not show (workaround is to use pipe more - '| more')
+* Clean up lots of debugging messages
+* Implement log to file in logger.au3
+* Optimize and remove unnecessary checking of handler for window or control
+* Verify on other Windows platform
 
 
 # NOTES:
