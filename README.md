@@ -15,12 +15,21 @@ Simply download the correct executable, either the 32 or 64 bit version.
 
 To test it manually:
 1) Download the latest executable from the [bin](https://github.com/ibaralf/automated_file_uploader/tree/master/bin) folder, there are two versions (32 and 64).
-2) Open your application upload windows file explorer
-3) Execute the .exe file
+2) Open a powershell window
+3) Change to the directory where you downloaded the exe file
+4) Execute the .exe file as shown below, you should see the help menu
   ```
-   ps> AutomatedFileUploader32.exe -d D:\Users\ibarraa\Documents -f fname1.txt fname2.txt
+   ps> AutomatedFileUploader32.exe -h | more
+   
+   Windows Auto File Uploader
+   Parameters:  (*) required
+     -d, directory path of files (*)
+     -f, list of files to upload, space separated (*)
+     -h, show help
+   Ex:
+     ps>  AutoFileUploader.exe -d D:\Users\ibarraa\Documents -f fname1.txt fname2.txt
   ```
-4) Files passed by parameter (-f) located in the directory (-d) should be automatically uploaded.
+Note: You need the (| more) to be able to show the output to the command line shell.
 
 # How it Works
 1) From your application, open a file upload window (ex. your web based application having an upload link that you click)
